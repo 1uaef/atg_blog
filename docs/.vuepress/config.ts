@@ -5,19 +5,41 @@ import {defineUserConfig} from 'vuepress';
 
 import {viteBundler} from "@vuepress/bundler-vite";
 import {slimsearchPlugin} from '@vuepress/plugin-slimsearch';
- // 导入 navbar 配置
+import navbar from "./navbar";
+// 导入 navbar 配置
 
 
 export default defineUserConfig({
-    templateDev: "",
     lang: 'zh-CN',
     title: '学海无涯，前路漫漫',    // 网站标题
 
     bundler: viteBundler(),
+
+
+    locales: {
+        '/': {
+            lang: 'en-US',
+        },
+        '/zh/': {
+            lang: 'zh-CN',
+        },
+    },
     theme: defaultTheme({
         logo: '/favicon.ico',  // 添加 logo 属性以在标题旁边显示图标
         // 顶部导航栏
-        navbar: [],
+        navbar: navbar,
+        // 中英文
+        locales: {
+            '/zh/': {
+                selectLanguageName: '简体中文',
+            },
+            '/': {
+                selectLanguageName: 'English',
+            },
+
+        }
+
+
     }),
     head: [
         ['link', {rel: 'icon', href: '/favicon.ico'}], // 添加 favicon.ico 图标
